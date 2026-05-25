@@ -26,8 +26,8 @@
     "files": "个文件"
   },
   "meta": {
-    "title": "TianJi 天机推演系统",
-    "description": "TianJi 天机推演系统 - 东方象数增强型多智能体推演系统"
+    "title": "天玑系统",
+    "description": "天玑系统 - 东方象数增强型多智能体推演系统"
   },
   "nav": {
     "visitGithub": "访问我们的Github主页"
@@ -75,7 +75,13 @@
     "layoutGraph": "图谱",
     "layoutSplit": "双栏",
     "layoutWorkbench": "工作台",
-    "stepNames": ["图谱构建", "环境搭建", "开始模拟", "报告生成", "深度互动"]
+    "stepNames": [
+      "图谱构建",
+      "环境搭建",
+      "开始模拟",
+      "报告生成",
+      "深度互动"
+    ]
   },
   "step1": {
     "ontologyGeneration": "本体生成",

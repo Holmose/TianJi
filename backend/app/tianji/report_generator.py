@@ -8,7 +8,7 @@ class TianJiReportGenerator:
         q = state["query"]
         s = state["symbolic"]
         lines = []
-        lines.append(f"# 天机推演报告：{state['report_id']}")
+        lines.append(f"# 天玑系统推演报告：{state['report_id']}")
         lines.append("")
         lines.append("## 1. 总断")
         lines.append(f"领域：{q['domain']}。当前主象为 **{s['bagua']['main']} / {s['wuxing']['main']}**，趋势卦参考 **{s['iching']['primary_hexagram']['name']} → {s['iching']['changed_hexagram']['name']}**。")

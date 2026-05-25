@@ -26,8 +26,8 @@
     "files": "files"
   },
   "meta": {
-    "title": "TianJi Simulation System",
-    "description": "TianJi - Oriental philosophy enhanced multi-agent simulation system"
+    "title": "天玑系统",
+    "description": "天玑系统 - 东方象数增强型多智能体推演系统"
   },
   "nav": {
     "visitGithub": "Visit our Github page"
@@ -75,7 +75,13 @@
     "layoutGraph": "Graph",
     "layoutSplit": "Split",
     "layoutWorkbench": "Workbench",
-    "stepNames": ["Graph Build", "Env Setup", "Run Simulation", "Report Generation", "Deep Interaction"]
+    "stepNames": [
+      "Graph Build",
+      "Env Setup",
+      "Run Simulation",
+      "Report Generation",
+      "Deep Interaction"
+    ]
   },
   "step1": {
     "ontologyGeneration": "Ontology Generation",

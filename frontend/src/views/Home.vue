@@ -2,7 +2,7 @@
   <div class="home-container">
     <!-- 顶部导航栏 -->
     <nav class="navbar">
-      <div class="nav-brand">TIANJI</div>
+      <div class="nav-brand">天玑</div>
       <div class="nav-links">
         <router-link to="/tianji" class="nav-link">天玑推演</router-link>
         <LanguageSwitcher />
