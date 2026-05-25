@@ -16,3 +16,11 @@ def test_qimen_engine_basic_output():
     assert result["god"]["name"]
     assert result["timing_hint"]
     assert result["risk_hint"]
+    assert result["useful_god"]["useful_palace"]
+    assert len(result["board"]) == 9
+
+
+def test_qimen_engine_nine_palace_board():
+    result = QimenEngine().analyze("2026-05-26 22:30", domain="strategy")
+    assert len(result["board"]) == 9
+    assert all(p in result["board"] for p in ["坎一宫", "坤二宫", "震三宫", "巽四宫", "中五宫", "乾六宫", "兑七宫", "艮八宫", "离九宫"])
