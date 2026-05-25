@@ -2,6 +2,23 @@
 
 All notable changes to TianJi will be documented in this file.
 
+## [0.4.0] - 2026-05-26
+
+### Added
+
+- Added V4 I Ching Transition Engine.
+- Added full 64-hexagram semantic dataset: `iching_64_hexagrams.json`.
+- Added `backend/app/tianji/engines/iching_engine.py`.
+- Added primary hexagram and changed hexagram trend modeling.
+- Added changing-line based stage warnings.
+- Integrated I Ching transition output into reports.
+- Integrated I Ching action hints into local simulation adapter.
+
+### Notes
+
+- V4 is a semantic trend engine, not deterministic divination.
+- Nuclear hexagram and line-by-line traditional texts are planned for future versions.
+
 ## [0.3.0] - 2026-05-26
 
 ### Added

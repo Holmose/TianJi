@@ -131,7 +131,40 @@ backend/app/tianji/data/bashen.json
 
 Qimen models current event situation and action timing, not deterministic prophecy.
 
-## V4: Full Hermes / MiroFish Integration
+## V4: I Ching 64-Hexagram Transition Engine
+
+Status: initial semantic implementation completed.
+
+### Goals
+
+Upgrade the trend layer from seed hexagrams to a full 64-hexagram transition model.
+
+### Implemented modules
+
+```text
+backend/app/tianji/engines/iching_engine.py
+backend/app/tianji/data/iching_64_hexagrams.json
+```
+
+### Current capabilities
+
+- Full 64-hexagram semantic dataset.
+- Primary hexagram selection by question/domain.
+- Changing-line generation by text/time seed.
+- Changed hexagram transition.
+- Stage warning by changing-line position.
+- Action hint combining primary and changed hexagram strategies.
+- Report integration.
+- Simulation adapter integration.
+
+### Limitations
+
+- No nuclear hexagram yet.
+- No traditional line texts yet.
+- No manual coin/yarrow input yet.
+- Semantic selection should be replaced or supplemented by explicit divination modes in later versions.
+
+## V5: Full Hermes / MiroFish Integration
 
 ### Goals
 

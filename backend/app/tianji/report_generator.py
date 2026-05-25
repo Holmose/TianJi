@@ -11,7 +11,7 @@ class TianJiReportGenerator:
         lines.append(f"# 天机推演报告：{state['report_id']}")
         lines.append("")
         lines.append("## 1. 总断")
-        lines.append(f"领域：{q['domain']}。当前主象为 **{s['bagua']['main']} / {s['wuxing']['main']}**，趋势卦参考 **{s['iching']['name']}**。")
+        lines.append(f"领域：{q['domain']}。当前主象为 **{s['bagua']['main']} / {s['wuxing']['main']}**，趋势卦参考 **{s['iching']['primary_hexagram']['name']} → {s['iching']['changed_hexagram']['name']}**。")
         lines.append(f"建议：{state['strategy']['best_action']}。")
         lines.append("")
         lines.append("## 2. 现实底盘")
@@ -20,7 +20,11 @@ class TianJiReportGenerator:
         lines.append("## 3. 象数建模")
         lines.append(f"- 八卦：{s['bagua']['main']}，关键词：{'、'.join(s['bagua']['keywords'])}")
         lines.append(f"- 五行：{s['wuxing']['main']}，动力：{'、'.join(s['wuxing']['keywords'])}；风险：{s['wuxing']['risk']}")
-        lines.append(f"- 易经：{s['iching']['name']}，趋势：{s['iching']['trend']}；策略：{s['iching']['strategy']}")
+        iching = s['iching']
+        lines.append(f"- 易经：本卦{iching['primary_hexagram']['name']} → 变卦{iching['changed_hexagram']['name']}，变爻{iching['changing_lines']}")
+        lines.append(f"  - 趋势：{iching['transition']}")
+        lines.append(f"  - 阶段风险：{'；'.join(iching['stage_warning'])}")
+        lines.append(f"  - 行动提示：{iching['action_hint']}")
         if s['bazi'].get('status') == 'ok':
             bazi = s['bazi']
             lines.append(f"- 四柱：年柱{bazi['pillars']['year']}、月柱{bazi['pillars']['month']}、日柱{bazi['pillars']['day']}、时柱{bazi['pillars']['hour']}")
