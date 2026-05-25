@@ -70,6 +70,9 @@ def _build_board(ju: int, dun: str) -> dict:
     positions = YANG_DUN_POSITIONS if dun == "阳遁" else YIN_DUN_POSITIONS
     ju_mod = ju if ju <= 9 else ju - 9
     palace_map = {}
+    stem_list = ["甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸"]
+    branch_list = ["子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥"]
+    # 阳遁：地盘干按乾1→9顺布，阴遁逆布
     for palace_idx, palace_name in enumerate(PALACE_ORDER):
         numeric_pos = palace_idx + 1
         board_pos = (positions.get(ju_mod, ju_mod) + numeric_pos - 1) % 9 + 1
@@ -77,10 +80,15 @@ def _build_board(ju: int, dun: str) -> dict:
         door_idx = (board_pos + 2) % 8
         door_name = DOOR_SORT_ORDER[door_idx]
         god_idx = (board_pos + 4) % 8
+        # 地盘天干：阳遁从甲开始顺飞
+        stem_idx = (numeric_pos - 1) % 10
+        branch_idx = (numeric_pos - 1) % 12
         palace_map[palace_name] = {
             "star": STAR_SORT_ORDER[star_idx],
             "door": DOOR_SORT_ORDER[door_idx],
             "god": GOD_SORT_ORDER[god_idx],
+            "stem": stem_list[stem_idx],
+            "branch": branch_list[branch_idx],
             "board_position": board_pos
         }
     return palace_map
@@ -156,6 +164,8 @@ class QimenEngine:
             "status": "ok",
             "event_time": event_time,
             "location": location,
+            "domain": domain,
+            "question": question,
             "bureau": {
                 "dun": dun,
                 "ju_number": ju,
@@ -168,7 +178,7 @@ class QimenEngine:
             "god": {"name": main_data["god"], **self.bashen.get(main_data["god"], {})},
             "useful_god": useful,
             "host_guest": hg,
-            "board": {k: {"star": v["star"], "door": v["door"], "god": v["god"]} for k, v in board.items()},
+            "board": {k: {"star": v["star"], "door": v["door"], "god": v["god"], "stem": v.get("stem", ""), "branch": v.get("branch", "")} for k, v in board.items()},
             "situation_signal": self._signals(main_palace_name, main_data),
             "timing_hint": self._timing_hint(main_data, useful, hg),
             "risk_hint": self._risk_hint(main_data, hg),

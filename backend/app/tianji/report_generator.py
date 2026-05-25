@@ -29,16 +29,28 @@ class TianJiReportGenerator:
             bazi = s['bazi']
             lines.append(f"- 四柱：年柱{bazi['pillars']['year']}、月柱{bazi['pillars']['month']}、日柱{bazi['pillars']['day']}、时柱{bazi['pillars']['hour']}")
             lines.append(f"  - 日主：{bazi['day_master']['stem']}{bazi['day_master']['element']}{bazi['day_master']['yin_yang']}")
+            lines.append(f"  - 身强：{bazi['strong_weak']} | 主导五行：{bazi['dominant_element']}")
             lines.append(f"  - 五行比例：{bazi['five_element_balance']}")
             lines.append(f"  - 人物倾向：{'；'.join(bazi['personality_bias'])}")
-            lines.append(f"  - 风险模式：{'；'.join(bazi['risk_pattern'])}")
+            if bazi.get('v3_precision'):
+                vp = bazi['v3_precision']
+                lines.append(f"  - 用神：{'、'.join(vp['useful_god']['stems'])} ({vp['useful_god']['note']})")
+                lines.append(f"  - 忌神：{'、'.join(vp['forbidden_god']['stems'])} ({vp['forbidden_god']['note']})")
+                lines.append(f"  - 藏干：年{vp['hidden_stems']['year']}、月{vp['hidden_stems']['month']}、日{vp['hidden_stems']['day']}、时{vp['hidden_stems']['hour']}")
+                lines.append(f"  - 月令：{vp['month_correction']}")
         else:
             lines.append(f"- 四柱：{s['bazi']['status']}，{s['bazi']['role']}")
         if s['qimen'].get('status') == 'ok':
             qimen = s['qimen']
-            lines.append(f"- 奇门：{qimen['bureau']['label']}，主宫{qimen['main_palace']['name']}，主门{qimen['door']['name']}，主星{qimen['star']['name']}，主神{qimen['god']['name']}")
+            lines.append(f"- 奇门：{qimen['bureau']['label']}，时干{qimen['bureau']['stem_branch_hour']}，主宫{qimen['main_palace']['name']}，主门{qimen['door']['name']}，主星{qimen['star']['name']}，主神{qimen['god']['name']}")
             lines.append(f"  - 局势信号：{'；'.join(qimen['situation_signal'])}")
-            lines.append(f"  - 主客关系：{qimen['host_guest']['posture']}；{qimen['host_guest']['relation']}")
+            if qimen.get('v3_precision'):
+                qp = qimen['v3_precision']
+                lines.append(f"  - 值符宫：{qp['value_fu']['palace']} | 值使宫：{qp['value_shi']['palace']}")
+                lines.append(f"  - 天盘干：{dict(list(qp['heaven_plate'].items())[:3])}")
+                lines.append(f"  - 地盘干：{dict(list(qp['earth_plate'].items())[:3])}")
+                if qp['horse_star'] != '无马星': lines.append(f"  - 马星：{qp['horse_star']}")
+                if qp['empty_palaces']: lines.append(f"  - 空亡：{'、'.join(qp['empty_palaces'][:5])}")
             lines.append(f"  - 时机提示：{qimen['timing_hint']}")
             lines.append(f"  - 风险提示：{'；'.join(qimen['risk_hint'])}")
         else:

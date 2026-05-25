@@ -7,7 +7,9 @@ from .engines.symbolic_engine import SymbolicEngine
 from .engines.simulation_adapter import LocalSimulationEngine
 from .engines.bazi_engine import BaziEngine
 from .engines.qimen_engine import QimenEngine
+from .engines.qimen_precision import QimenPrecisionEngine
 from .engines.iching_engine import IChingEngine
+from .engines.bazi_precision import BaziPrecisionEngine
 
 class TianJiOrchestrator:
     def __init__(self) -> None:
@@ -16,6 +18,8 @@ class TianJiOrchestrator:
         self.bazi = BaziEngine()
         self.qimen = QimenEngine()
         self.iching = IChingEngine()
+        self.bazi_precision = BaziPrecisionEngine()
+        self.qimen_precision = QimenPrecisionEngine()
         self.sim = LocalSimulationEngine()
 
     def run(self, question: str, domain: str = "unknown", goal: str = "", event_time: str | None = None, location: str | None = None, rounds: int = 3, birth_datetime: str | None = None, gender: str | None = None) -> dict:
@@ -31,8 +35,20 @@ class TianJiOrchestrator:
         state.symbolic.bagua = sym["bagua"]
         state.symbolic.wuxing = sym["wuxing"]
         state.symbolic.iching = self.iching.analyze(question, state.query.domain, event_time)
-        state.symbolic.bazi = self.bazi.analyze(birth_datetime=birth_datetime, gender=gender, location=location)
-        state.symbolic.qimen = self.qimen.analyze(event_time=event_time, location=location, question=question, domain=state.query.domain)
+        bazi = self.bazi.analyze(birth_datetime=birth_datetime, gender=gender, location=location)
+        state.symbolic.bazi = bazi
+        if bazi.get("status") == "ok":
+            precision = self.bazi_precision.analyze(
+                bazi["pillars"], bazi["day_master"],
+                bazi["strong_weak"], bazi["dominant_element"],
+                bazi["five_element_balance"]
+            )
+            bazi["v3_precision"] = precision
+        qimen = self.qimen.analyze(event_time=event_time, location=location, question=question, domain=state.query.domain)
+        state.symbolic.qimen = qimen
+        if qimen.get("status") == "ok":
+            qp = self.qimen_precision.analyze(qimen["bureau"], qimen["board"], state.query.domain, question)
+            qimen["v3_precision"] = qp
         d = state.to_dict()
         d["simulation"] = self.sim.run(d, rounds)
         d["causal"] = self._causal(d)
