@@ -4,6 +4,7 @@
     <nav class="navbar">
       <div class="nav-brand">TIANJI</div>
       <div class="nav-links">
+        <router-link to="/tianji" class="nav-link">天玑推演</router-link>
         <LanguageSwitcher />
         <a href="https://github.com/Holmose/TianJi" target="_blank" class="github-link">
           {{ $t('nav.visitGithub') }} <span class="arrow">↗</span>

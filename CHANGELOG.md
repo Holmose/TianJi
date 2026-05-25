@@ -2,6 +2,22 @@
 
 All notable changes to TianJi will be documented in this file.
 
+## [0.6.0] - 2026-05-26
+
+### Added
+
+- Added TianJi frontend page: `frontend/src/views/TianJiView.vue` with form-based simulation interface.
+- Added TianJi navigation link in Home navbar.
+- Added TianJi routes: `/tianji` page.
+- Added TianJi review/feedback system: `backend/app/api/tianji_review.py`.
+- Added review API endpoints:
+  - `POST /api/tianji-review/reviews/<report_id>` — save feedback
+  - `GET /api/tianji-review/reviews/<report_id>` — get feedback
+  - `DELETE /api/tianji-review/reviews/<report_id>` — delete feedback
+  - `GET /api/tianji-review/reviews` — list all reviews
+  - `GET /api/tianji-review/stats` — review statistics and accuracy
+- Added review UI in TianJi frontend page.
+
 ## [0.5.0] - 2026-05-26
 
 ### Added
