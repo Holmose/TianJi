@@ -136,6 +136,76 @@ class TianJiReportGenerator:
                 lines.append(f"- 观察信号：{','.join(act.get('watch_signals', []))}")
         else:
             lines.append("（解读数据未生成）")
+
+        # ── 第10章：神性赋能与天玑判词 ─────────────────────────
+        divine = state.get("divine", {})
+        if divine:
+            lines.append("")
+            lines.append("## 10. 天玑判词 · 神性赋能")
+            lines.append("")
+            # 天机
+            timing = divine.get("timing", {})
+            lines.append("### 天机·时空同频")
+            lines.append(f"- 天时：{timing.get('celestial_time', '')}")
+            lines.append(f"- 地利：{timing.get('earthly_location', '')}")
+            lines.append(f"- 人和：{timing.get('human_harmony', '')}")
+            lines.append(f"- 时代：{timing.get('epoch', '')}")
+            lines.append("")
+            # 命盘铭文
+            verse = divine.get("destiny_verse", {})
+            lines.append("### 命盘铭文")
+            lines.append(f"**{verse.get('destiny_plate', '')}**")
+            lines.append(f"*{verse.get('destiny_poem', '')}*")
+            lines.append("")
+            lines.append(f"*{verse.get('ten_gods_sigil', '')}*")
+            lines.append(f"*{verse.get('useful_god_sigil', '')}*")
+            lines.append(f"*{verse.get('forbidden_god_sigil', '')}*")
+            lines.append("")
+            # 天玑判词
+            judgment = divine.get("divine_judgment", {})
+            lines.append("### 天玑判词")
+            lines.append(f"**{judgment.get('overall_judgment', '')}**")
+            lines.append(f"- 奇门：{judgment.get('qimen_judgment', '')}")
+            lines.append(f"- 易经：{judgment.get('iching_judgment', '')}")
+            lines.append("")
+            # 天象
+            celestial = divine.get("celestial_sign", {})
+            if celestial:
+                lines.append("### 奇门天象")
+                lines.append(f"- {celestial.get('celestial_map', '')}")
+                lines.append(f"- 九宫：{celestial.get('palace_realm', '')}")
+                lines.append(f"- 八门：{celestial.get('door_nature', '')}")
+                lines.append(f"- 九星：{celestial.get('star_light', '')}")
+                lines.append(f"- 八神：{celestial.get('god_command', '')}")
+                lines.append("")
+            # 三路径神谕
+            paths = divine.get("three_paths_divine", [])
+            if paths:
+                lines.append("### 天机预言·三路径")
+                for p in paths:
+                    lines.append(f"- **{p['name']}**（{p['celestial_fate']}）：{p['prophecy']}")
+                    for s in p.get("divine_signs", []):
+                        lines.append(f"  - {s}")
+                lines.append("")
+            # 核心金句
+            golden = divine.get("golden_words", {})
+            if golden:
+                lines.append("### 核心金句")
+                lines.append(f"**{golden.get('golden_sentence', '')}**")
+                lines.append(f"- 修：{golden.get('advice', '')}")
+                lines.append(f"- 戒：{golden.get('warning', '')}")
+                lines.append(f"- 天玑：{golden.get('tianji_motto', '')}")
+                lines.append("")
+            # 天玑护符
+            talisman = divine.get("talisman", {})
+            if talisman:
+                lines.append("### 天玑护符")
+                lines.append(f"**{talisman.get('talisman_text', '')}**")
+                lines.append(f"- 符印：{talisman.get('talisman_id', '')}")
+                lines.append(f"- 天机：{talisman.get('celestial_elements', '')}")
+                lines.append(f"- 命要：{talisman.get('destiny_key', '')}")
+                lines.append(f"- 易象：{talisman.get('iching_key', '')}")
+                lines.append(f"- 神力：{talisman.get('power_level', '')}")
         return "\n".join(lines) + "\n"
 
     def save(self, state: dict, out_dir: str | Path) -> dict:

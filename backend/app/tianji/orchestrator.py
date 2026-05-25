@@ -12,6 +12,7 @@ from .engines.iching_engine import IChingEngine
 from .engines.bazi_precision import BaziPrecisionEngine
 from .engines.iching_precision import IChingPrecisionEngine
 from .engines.interpretation_engine import InterpretationEngine
+from .engines.divine_engine import DivineEngine
 
 class TianJiOrchestrator:
     def __init__(self) -> None:
@@ -25,6 +26,7 @@ class TianJiOrchestrator:
         self.qimen_precision = QimenPrecisionEngine()
         self.sim = LocalSimulationEngine()
         self.interpreter = InterpretationEngine()
+        self.divine = DivineEngine()
 
     def run(self, question: str, domain: str = "unknown", goal: str = "", event_time: str | None = None, location: str | None = None, rounds: int = 3, birth_datetime: str | None = None, gender: str | None = None) -> dict:
         parsed = self.reality.parse(question, domain, goal)
@@ -70,6 +72,7 @@ class TianJiOrchestrator:
         d["strategy"] = self._strategy(d)
         d["confidence"] = self._confidence(d)
         d["interpretation"] = self.interpreter.interpret(d)
+        d["divine"] = self.divine.divine(d)
         return d
 
     def _causal(self, d: dict) -> dict:
