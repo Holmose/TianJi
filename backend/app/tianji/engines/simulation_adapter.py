@@ -3,7 +3,7 @@ from __future__ import annotations
 class LocalSimulationEngine:
     """Deterministic V1 fallback simulation.
 
-    Full Hermes/MiroFish integration can replace this adapter. The output shape
+    Future full simulation integration can replace this adapter. The output shape
     is intentionally compatible with future multi-agent rounds.
     """
 
