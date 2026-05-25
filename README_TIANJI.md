@@ -101,11 +101,20 @@ backend/app/tianji/
   data/
     bagua.json                # 八卦象意库
     wuxing.json               # 五行动力库
-    iching_seed.json          # 易经语义种子库
+    iching_64_hexagrams.json  # 易经64卦语义库
+    tiangan_dizhi.json        # 天干地支数据
+    ten_gods.json             # 十神映射数据
+    jiugong.json              # 九宫语义数据
+    bamen.json                # 八门语义数据
+    jiuxing.json              # 九星语义数据
+    bashen.json               # 八神语义数据
   engines/
     reality_parser.py         # 现实解析器
-    symbolic_engine.py        # 东方象数语义引擎
-    simulation_adapter.py     # V1本地多Agent适配器
+    symbolic_engine.py        # 八卦/五行象意引擎
+    iching_engine.py          # V4 易经64卦趋势引擎
+    bazi_engine.py            # V2 四柱人物结构引擎
+    qimen_engine.py           # V3 奇门事件局势引擎
+    simulation_adapter.py     # 本地多Agent适配器
 backend/scripts/
   tianji_cli.py               # CLI入口
 ```
@@ -156,7 +165,16 @@ V1 内置 10 类 Agent 角色，后续会接入真实 Hermes / MiroFish Agent：
 - 用神定位
 - 主客关系与行动时机
 
-### V4：Hermes / MiroFish 深度集成
+### V4：易经 64 卦趋势演化引擎
+
+- 完整 64 卦语义数据
+- 本卦/变卦
+- 变爻阶段提示
+- 趋势转化
+- 阶段风险
+- 行动提示
+
+### V5：Hermes / MiroFish 深度集成
 
 - 接入完整版多 Agent 调度
 - 接入长期记忆
@@ -187,10 +205,16 @@ V1 内置 10 类 Agent 角色，后续会接入真实 Hermes / MiroFish Agent：
 
 ## 10. 当前状态
 
-TianJi V1 原型已经可以在本地 CLI 跑通。下一步建议：
+当前版本为 **V0.4.0 / V1-V4 Prototype Completed**，已在本地 CLI 与 `/api/tianji/run` 跑通完整链路：
 
-1. 跑通 CLI 示例。
-2. 增加 API endpoint。
-3. 改 frontend 标题与入口。
-4. 接入真实 Hermes / MiroFish simulation manager。
-5. 等你提供 GitHub/Gitee 链接后，初始化 git 并推送开源仓库。
+1. V1 语义推演底座：现实解析、八卦、五行、多 Agent、因果回溯、未来三路径。
+2. V2 四柱人物长期结构：出生时间、近似四柱、日主、十神、五行比例、人物倾向、风险模式。
+3. V3 奇门事件局势：事件时间/地点、九宫、八门、九星、八神、主客关系、时机和风险提示。
+4. V4 易经64卦趋势：本卦、变卦、变爻阶段提示、趋势转化和行动建议。
+
+下一步建议：
+
+1. 做 V5 示例库与测试体系。
+2. 替换前端遗留 MiroFish 品牌为 TianJi。
+3. 接入真实 Hermes / MiroFish simulation manager。
+4. 增加预测结果回填与误差分析。

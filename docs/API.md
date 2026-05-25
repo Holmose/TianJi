@@ -20,7 +20,7 @@ Response:
 {
   "success": true,
   "service": "TianJi",
-  "version": "0.1.0"
+  "version": "0.4.0"
 }
 ```
 
@@ -55,8 +55,8 @@ Content-Type: application/json
 | `question` | string | yes | The raw question or event background to simulate. |
 | `domain` | string | no | `relationship`, `business`, `content`, `personal`, `strategy`, or `unknown`. Defaults to `unknown`. |
 | `goal` | string | no | User objective. |
-| `event_time` | string | no | Event/start time. V1 stores it; V3 will use it for Qimen. |
-| `location` | string | no | Event location. V1 stores it; V3 Qimen will use it. |
+| `event_time` | string | no | Event/start time. Used by V3 Qimen situation engine and V4 I Ching changing-line seed. |
+| `location` | string | no | Event location. Used by V3 Qimen output context. |
 | `birth_datetime` | string | no | Birth datetime for V2 Bazi engine. Format: `YYYY-MM-DD HH:MM`. |
 | `gender` | string | no | Gender marker for future luck-cycle direction extensions. |
 | `rounds` | integer | no | Simulation rounds. V1 local adapter defaults to `3`. |
@@ -104,11 +104,11 @@ Parsed real-world context:
 
 Oriental symbolic state:
 
-- bagua
-- wuxing
-- iching
-- bazi placeholder
-- qimen placeholder
+- bagua: 八卦状态象意
+- wuxing: 五行动力结构
+- iching: V4 64卦趋势演化，本卦/变卦/变爻/阶段风险
+- bazi: V2 四柱人物长期结构，出生时间缺失时返回 `missing_birth_datetime`
+- qimen: V3 奇门事件局势，事件时间缺失时返回 `missing_event_time`
 
 ### `simulation`
 

@@ -32,4 +32,4 @@ def run_tianji():
 
 @tianji_bp.route('/health', methods=['GET'])
 def tianji_health():
-    return jsonify({"success": True, "service": "TianJi", "version": "0.1.0"})
+    return jsonify({"success": True, "service": "TianJi", "version": "0.4.0"})
