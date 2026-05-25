@@ -6,18 +6,30 @@ TianJi is an oriental philosophy enhanced multi-agent simulation system for caus
 
 ## 当前状态
 
-当前版本为 **V1 Prototype**，基于 MiroFish 源码骨架重建，新增 `backend/app/tianji` 天机推演模块，已支持：
+当前版本为 **V0.4.0 / V1-V4 Prototype Completed**，基于 MiroFish 源码骨架重建，新增 `backend/app/tianji` 天机推演模块，已完成四层核心能力：
 
-- 现实解析 Reality Parser
-- 八卦象意 Bagua semantic mapping
-- 五行动力 Wuxing dynamics
-- 易经趋势 IChing transition seeds
-- 本地多 Agent 推演适配器
-- 因果回溯
-- 未来三路径预测
-- Markdown / JSON 报告生成
-- CLI 入口
-- HTTP API：`/api/tianji/run`
+- **V1 语义推演底座**：现实解析、八卦象意、五行动力、本地多 Agent 推演、因果回溯、未来三路径、Markdown / JSON 报告、CLI、HTTP API `/api/tianji/run`
+- **V2 四柱人物长期结构模型**：出生时间输入、近似四柱、日主、可见十神、五行比例、人物倾向、风险模式、Agent 参数
+- **V3 奇门事件局势引擎**：事件时间/地点输入、语义阴阳遁局、九宫、八门、九星、八神、主客关系、时机提示、风险提示、行动提示
+- **V4 易经 64 卦趋势演化引擎**：完整 64 卦语义数据、本卦/变卦、变爻阶段提示、趋势转化、阶段风险、行动提示
+
+当前系统已经形成完整推演链路：
+
+```text
+现实解析
+  ↓
+八卦/五行状态象意
+  ↓
+易经64卦趋势演化
+  ↓
+四柱人物长期结构
+  ↓
+奇门事件时机局势
+  ↓
+多 Agent 争论收敛
+  ↓
+过去反推 + 未来三路径 + 行动建议
+```
 
 ## 快速体验
 
@@ -46,6 +58,10 @@ POST /api/tianji/run
   "question": "我现在想做一个东方哲学增强型推演系统，未来这个项目能不能做大？",
   "domain": "strategy",
   "goal": "判断项目路线",
+  "event_time": "2026-05-26 22:10",
+  "location": "Guangzhou",
+  "birth_datetime": "1998-06-15 14:30",
+  "gender": "male",
   "rounds": 3,
   "save_report": true
 }
